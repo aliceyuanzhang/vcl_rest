@@ -32,11 +32,62 @@ html {
   display: flex;
 }
 
+#chat-container {
+  max-height: 200px;
+  overflow: scroll;
+}
+
+h1 {
+  font-family: "Merienda", sans-serif;
+}
+
+h2 {
+  font-weight: 400;
+}
+
 body {
   color: rgba(199, 161, 162, 0.85);
-  font-family: "Roboto", sans-serif;
-  font-size: 20px;
+  font-family: "Cairo", sans-serif;
+  font-size: 14px;
   text-decoration: none;
+}
+
+input {
+  height: 35px;
+  border: 1px solid rgba(199, 161, 162, 0.85);
+  border-radius: 5px;
+  background-color: transparent;
+}
+
+input[type=text] {
+  width: 30%;
+  padding: 5px 10px 5px 10px;
+  transition: width 0.5s ease-in-out;
+}
+
+input[type=text]:focus {
+  color: rgba(199, 161, 162, 0.85);
+  width: 70%;
+}
+
+input[type=submit] {
+  color:rgba(199, 161, 162, 0.85);
+  cursor:  pointer;
+  transition: color 0.5s ease-in-out;
+  transition: background-color 0.5s ease-in-out;
+}
+
+input[type=submit]:hover {
+  background-color: rgba(199, 199, 199, .7);
+  color: #572766;
+}
+
+::placeholder {
+  color: rgba(199, 161, 162, 0.85);
+}
+
+input:focus::placeholder {
+  color: transparent;;
 }
 
 .response {
@@ -44,14 +95,8 @@ body {
   border-radius: 2px;*/
   margin: 5px 10px 5px 10px;
   transition: color 1.5s ease-in-out;
-
 }
 
 .response:hover {
   color: transparent;
-}
-
-@font-face {
-  font-family: "Blocus";
-  src:url("../fonts/Blocus.otf");
 }

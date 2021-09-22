@@ -11,7 +11,8 @@
 
     <link rel="stylesheet" href="style.css">
     <!--font-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merienda">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cairo">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Include firebase scripts from CDN      -->
     <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -24,7 +25,7 @@
 </head>
 
 <div class="topSection"> 
-  <div class="topDiv"><h2><i>join us in rest...</i></h2></div>
+  <div class="topDiv"><h1>collective rest portal</h1></div>
   <div class="topDiv">
     <audio controls src="/media/cc0-audio/t-rex-roar.mp3">
             Your browser does not support the
@@ -36,7 +37,7 @@
 
 <br>
 
-<hr style="background-color:rgba(199, 161, 162, 0.85);">
+<hr style="border:1px solid #572766;">
 
 <br><br><br>
 
@@ -45,30 +46,23 @@
 <br><br>
 <br><br><br><br>
 
-<h1>networked dream chat...</h1>
-
 <h1><p id="counter"></p></h1>
 
 
 <body>
-    <!--  All the HTML is right here   -->
-    <div id="container">
-      <!-- This is the HTML for the Text input  are -->
-      <div id="text-input" class="input-container">
+    <div id="dreamspace">
 
-        <div class="header"><br><br><br>
-        </div>
+        <h2>NETWORKED DREAMSPACE</h2>
+        <br>
 
         <!-- This list is where all text in the database is shown -->
         <div id="chat-container"></div>
-
+        <br><br>
         <!-- This input form controls submission of text input -->
         <form id="text-input-form" onsubmit="return false">
-          <input type="text" id="text-input-entry" placeholder="Put text in here"/>
-          <input type="submit" id="text-input-submit" />
+          <input type="text" id="text-input-entry" placeholder="Write into our dream..."/>
+          <input type="submit" id="text-input-submit" value="Share"/>
         </form>
-
-      </div>
     </div>
 
 </body>
@@ -100,7 +94,7 @@
         let value = data.val();
         //So you just add that new thing
         console.log(value);
-        chatContainer.innerHTML = chatContainer.innerHTML + "<div class='response'>" + value + "</div>";
+        chatContainer.innerHTML = chatContainer.innerHTML + "<span class='response'>" + value + "</span>";
       });
 
       console.log(chatContainer);
@@ -119,6 +113,22 @@
         updates[newKey] = textToSubmit;
         dbRef.update(updates);
       }
+
+      //CHAT SCROLL BOTTOM
+
+      function scrollToBottom() {
+        var chat = document.getElementById("chat-container");
+        chat.scrollTop = chat.scrollHeight;
+      }
+
+      // //CLEAR FORM
+      // function submitForm() {
+      //    var frm = document.getElementById("text-input-form");
+      //    frm.submit(); // Submit
+      //    frm.children('input').val('');  // Reset
+      //    return false; // Prevent page refresh
+      // }
+
 
       //PRESENCE COUNTER
 
@@ -147,6 +157,7 @@
         presenceCounter.innerHTML = (snap.numChildren() - 1) + " currently resting";
         console.log("# online = " + (snap.numChildren() - 1));
       });
+
 
     </script>
 
