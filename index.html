@@ -1,0 +1,153 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Collective Rest Portal | virtual care lab</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description"
+        content="Collective Rest Portal is hosted by virtual care lab for the 4S Annual Conference">
+    <meta name="author" content="virtual care lab">
+
+    <link rel="stylesheet" href="style.css">
+    <!--font-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Include firebase scripts from CDN      -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use-->
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
+
+</head>
+
+<div class="topSection"> 
+  <div class="topDiv"><h2><i>join us in rest...</i></h2></div>
+  <div class="topDiv">
+    <audio controls src="/media/cc0-audio/t-rex-roar.mp3">
+            Your browser does not support the
+            <code>audio</code> element.
+    </audio>
+
+  </div>
+</div>
+
+<br>
+
+<hr style="background-color:rgba(199, 161, 162, 0.85);">
+
+<br><br><br>
+
+<span id="presenceCounter"></span>
+
+<br><br>
+<br><br><br><br>
+
+<h1>networked dream chat...</h1>
+
+<h1><p id="counter"></p></h1>
+
+
+<body>
+    <!--  All the HTML is right here   -->
+    <div id="container">
+      <!-- This is the HTML for the Text input  are -->
+      <div id="text-input" class="input-container">
+
+        <div class="header"><br><br><br>
+        </div>
+
+        <!-- This list is where all text in the database is shown -->
+        <div id="chat-container"></div>
+
+        <!-- This input form controls submission of text input -->
+        <form id="text-input-form" onsubmit="return false">
+          <input type="text" id="text-input-entry" placeholder="Put text in here"/>
+          <input type="submit" id="text-input-submit" />
+        </form>
+
+      </div>
+    </div>
+
+</body>
+
+    <!-- All the magic happens in this part of the code -->
+    <script>
+      let chatContainer = document.getElementById("chat-container");
+
+      //First we just set some config parameters
+      //These are meant to be secret to my project, so please be nice
+      var firebaseConfig = {
+        apiKey: "AIzaSyAhsseNLfVomaBwaBw88uqaPP23ccgL08c",
+        authDomain: "vcl-rest.firebaseapp.com",
+        databaseURL: "https://vcl-rest-default-rtdb.firebaseio.com",
+        projectId: "vcl-rest",
+        storageBucket: "vcl-rest.appspot.com",
+        messagingSenderId: "806191675690",
+        appId: "1:806191675690:web:210479404a19a7cbc54653",
+        measurementId: "G-B51QSEWRJL"
+      };
+
+      //Then we set up with firebase project data
+      firebase.initializeApp(firebaseConfig); 
+
+      const db = firebase.database(); //firebase has different features. we set up short to the database feature. 
+      let dbRef = db.ref("/text"); //database shouldn't be accessed in its root. needs reference to a folder inside. if it doesn't exist it'll make it for you
+      dbRef.on("child_added", data => { //gets called when data comes through. 'data =>' is an anonymous function shortcut
+        let id = data.key;
+        let value = data.val();
+        //So you just add that new thing
+        console.log(value);
+        chatContainer.innerHTML = chatContainer.innerHTML + "<div class='response'>" + value + "</div>";
+      });
+
+      console.log(chatContainer);
+
+      //click button will run this function
+      const textInputSubmit = document.getElementById("text-input-submit");
+      textInputSubmit.addEventListener("click", () => submitText()); 
+      //can also use "click", (e) => {console.log(e)} and when you use this the 'e' has additional info like e.pageX where on the page they clicked (would use 'window.addEventListener')
+
+      let textContainerElement = document.getElementById("text-input-entry");
+      function submitText() {
+        let textToSubmit = textContainerElement.value; //gets text value from textbox
+        let newKey = dbRef.push().key; //ask firebase to give you a new key / 'name'
+
+        let updates = {}; //going to send firebase list of values
+        updates[newKey] = textToSubmit;
+        dbRef.update(updates);
+      }
+
+      //PRESENCE COUNTER
+
+      let presenceRef = db.ref("/presence");
+      let thisVisitor = presenceRef.push();
+      
+      // console.log(presenceRef);
+      
+      // presenceRef.on('value', function(snapshot) {
+      //    if (snapshot.exists())
+      //       console.log ("folder exists");
+      //    else
+      //       console.log("make new folder");
+      // });
+
+      presenceRef.on("value", function(snap) {
+        if (snap.val()) {
+          // Remove ourselves when we disconnect.
+          thisVisitor.onDisconnect().remove();
+          thisVisitor.set(true);
+        }
+      });
+
+      // Number of online users is the number of objects in the presence list.
+      presenceRef.on("value", function(snap) {
+        presenceCounter.innerHTML = (snap.numChildren() - 1) + " currently resting";
+        console.log("# online = " + (snap.numChildren() - 1));
+      });
+
+    </script>
+
+</html>

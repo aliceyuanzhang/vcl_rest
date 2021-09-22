@@ -1,0 +1,57 @@
+body, html {
+  margin:0;
+  max-height:100%;  /* added */
+  max-width:100%;  /* added */
+  background-color: transparent;
+  padding-left:3vw;
+  padding-right:3vw;
+  padding-top:3vh;
+  padding-bottom: 3vh;
+  scroll-behavior: smooth;
+}
+
+html { 
+    background-image: url(./images/bkgd.jpg); 
+    background-color: rgba(87,39,102,1);
+    background-blend-mode: multiply;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    cursor: url(./images/cursor.png) 25 25, auto;
+  }
+
+.topSection {
+  display:  flex;
+  flex-direction: row;
+  justify-content: space-between;
+  vertical-align: middle;
+}
+
+.topDiv {
+  display: flex;
+}
+
+body {
+  color: rgba(199, 161, 162, 0.85);
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.response {
+/*  border: .5px solid white;
+  border-radius: 2px;*/
+  margin: 5px 10px 5px 10px;
+  transition: color 1.5s ease-in-out;
+
+}
+
+.response:hover {
+  color: transparent;
+}
+
+@font-face {
+  font-family: "Blocus";
+  src:url("../fonts/Blocus.otf");
+}
