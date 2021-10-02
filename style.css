@@ -59,14 +59,14 @@ h2 {
 
 #bed {
   margin-top: -5em;
-  left: 55%;
+  left: 50%;
   background-image: url(./images/bed.png);
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
   position: absolute;
   z-index: 1;
-  padding: 7vw;
+  padding: 6vw;
 }
 
       #bed:hover {
@@ -74,15 +74,15 @@ h2 {
       }
 
 #why {
-  margin-top: 7em;
+  margin-top: 7.5em;
   float: left;
   background-image: url(./images/why.png);
   background-size: contain;
-  background-position: center;
+  background-position: 40% 45%;
   background-repeat: no-repeat;
   position: absolute;
   z-index: 2;
-  padding: 8vw;
+  padding: 7vw;
 
   color: #000870;
 }
@@ -92,11 +92,11 @@ h2 {
       }
 
 #presence {
-  margin-top: 4em;
-  right: 0px;
+  margin-top: 3em;
+  right: 4px;
   background-image: url(./images/presence.png);
   background-size: contain;
-  background-position: center;
+  background-position: 30% 50%;
   background-repeat: no-repeat;
   position: absolute;
   z-index: 2;
@@ -110,39 +110,58 @@ h2 {
       }
 
 #lineages {
-  margin-top: 22em;
+  margin-top: 25em;
   float: left;
-  background-color: black;
+  background-image: url(./images/lineages.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
   position: absolute;
   z-index: 3;
-  padding: 3vw;
+  padding: 6vw;
 
-  color: #A2D2C4;
+  color: #97ebd3;
 }
+
+      #lineages:hover {
+        transform: rotate(7deg);
+      }
 
 #score {
-  margin-top: 22em;
+  margin-top: 26em;
   right: 0px;
-  background-color: black;
+  background-image: url(./images/score.png);
+  background-size: contain;
+  background-position: 65% 30%;
+  background-repeat: no-repeat;
   position: absolute;
   z-index: 3;
-  padding: 3vw;
+  padding: 6.5vw;
 
-  color: #D9A8FF;
+  color: #a72b00;
 }
 
+      #score:hover {
+        transform: rotate(-3deg);
+      }
+
 #about {
-  margin-bottom: .5em;
-  float: bottom;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: black;
+  margin-top: 36em;
+  left: 30%;
+  background-image: url(./images/about.png);
+  background-size: contain;
+  background-position: 70% 60%;
+  background-repeat: no-repeat;
   position: absolute;
-  z-index: 1;
-  padding: 2vw;
+  z-index: 4;
+  padding: 5.5vw;
 
   color: #FFFFFF;
 }
+
+      #about:hover {
+        transform: rotate(-9deg);
+      }
 
 #main-section {
   max-height: 50em;
