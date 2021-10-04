@@ -37,33 +37,29 @@ html {
     cursor: url(./images/cursor.png) 25 25, auto;
   }
 
-.topSection {
-  display:  flex;
-  flex-direction: row;
-  justify-content: space-between;
-
+html:active {
+  cursor: url(./images/cursor-click.png) 25 25, auto;
 }
 
-.topDiv {
-  text-align: left;
-  vertical-align: middle;
-  display: flex;
-  margin: 2vw;
+footer {
+  position: absolute;
+  z-index: -50; 
+  bottom: -50px;
+  width: 45%;
+  float: right;
+  left: 40%;
+  margin-left: auto;
+  margin-right: auto;
+
+  text-align: right;
+  font-family: "OCR A", sans-serif;
+  font-size:  12px;
+  line-height: 125%;
+  color: #BDB68A;
 }
 
 a {
   color: white;
-}
-
-h1 {
-  font-family: "OCR A", sans-serif;
-  font-size:  16px;
-  font-weight: 100;
-  color: white;
-}
-
-h2 {
-  font-weight: 400;
 }
 
 #bed {
@@ -338,8 +334,7 @@ h2 {
 }
 
 .response {
-/*  border: .5px solid white;
-  border-radius: 2px;*/
+  color: white;
   margin: 5px 10px 5px 10px;
   transition: color 1.5s ease-in-out;
 }
@@ -370,7 +365,7 @@ input[type=text]:focus {
 input[type=submit] {
   color:#BDB68A;
   width: 15%;
-  cursor:  pointer;
+  cursor: url(./images/cursor.png) 25 25, auto;
   transition: color 0.5s ease-in-out;
   transition: background-color 0.5s ease-in-out;
 }
