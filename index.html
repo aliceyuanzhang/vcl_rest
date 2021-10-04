@@ -23,16 +23,11 @@
 
 </head>
 
-<div class="topSection"> 
+<!-- <div class="topSection"> 
   <div class="topDiv"><h1>A PORTAL FOR COLLECTIVE REST...</h1></div>
   <div class="topDiv">
-    <audio controls src="./media/sound_elc.mp3">
-            Your browser does not support the
-            <code>audio</code> element.
-    </audio>
-
   </div>
-</div>
+</div> -->
 
 <br>
 
@@ -67,7 +62,7 @@
               <!-- This input form controls submission of text input -->
               <form id="text-input-form" onsubmit="return false">
                 <input type="text" id="text-input-entry" placeholder="Let folks know..."/>
-                <input type="submit" id="text-input-submit" value="Share"/>
+                <input type="submit" id="text-input-submit" onclick="submitlock()" value="Share"/>
               </form>
               <br><br>
          </div>
@@ -85,9 +80,13 @@
 
          <div id='section-presence'>
 
-              <br><br><br>
+              <br><br>
               <span id="presenceCounter"></span>
-              <h1><p id="counter"></p></h1>
+              <h1><p id="counter"></p></h1><br>
+              <audio controls src="./media/sound_elc.mp3">
+                  Your browser does not support the
+                  <code>audio</code> element.
+              </audio>
          </div>
 
          <div id='section-lineages'>
@@ -200,103 +199,104 @@
      
 </body>
 
+<!-- All the magic happens in this part of the code -->
+<script>
 
-    <!-- All the magic happens in this part of the code -->
-    <script>
+  let chatContainer = document.getElementById("chat-container");
 
-      let chatContainer = document.getElementById("chat-container");
+  //First we just set some config parameters
+  //These are meant to be secret to my project, so please be nice
+  var firebaseConfig = {
+    apiKey: "AIzaSyAhsseNLfVomaBwaBw88uqaPP23ccgL08c",
+    authDomain: "vcl-rest.firebaseapp.com",
+    databaseURL: "https://vcl-rest-default-rtdb.firebaseio.com",
+    projectId: "vcl-rest",
+    storageBucket: "vcl-rest.appspot.com",
+    messagingSenderId: "806191675690",
+    appId: "1:806191675690:web:210479404a19a7cbc54653",
+    measurementId: "G-B51QSEWRJL"
+  };
 
-      //First we just set some config parameters
-      //These are meant to be secret to my project, so please be nice
-      var firebaseConfig = {
-        apiKey: "AIzaSyAhsseNLfVomaBwaBw88uqaPP23ccgL08c",
-        authDomain: "vcl-rest.firebaseapp.com",
-        databaseURL: "https://vcl-rest-default-rtdb.firebaseio.com",
-        projectId: "vcl-rest",
-        storageBucket: "vcl-rest.appspot.com",
-        messagingSenderId: "806191675690",
-        appId: "1:806191675690:web:210479404a19a7cbc54653",
-        measurementId: "G-B51QSEWRJL"
-      };
+  //Then we set up with firebase project data
+  firebase.initializeApp(firebaseConfig); 
 
-      //Then we set up with firebase project data
-      firebase.initializeApp(firebaseConfig); 
+  const db = firebase.database(); //firebase has different features. we set up short to the database feature. 
+  let dbRef = db.ref("/text"); //database shouldn't be accessed in its root. needs reference to a folder inside. if it doesn't exist it'll make it for you
+  dbRef.on("child_added", data => { //gets called when data comes through. 'data =>' is an anonymous function shortcut
+    let id = data.key;
+    let value = data.val();
+    //So you just add that new thing
+    console.log(value);
+    chatContainer.innerHTML = "<div class='response'>" + value + "</div>" + chatContainer.innerHTML;
+  });
 
-      const db = firebase.database(); //firebase has different features. we set up short to the database feature. 
-      let dbRef = db.ref("/text"); //database shouldn't be accessed in its root. needs reference to a folder inside. if it doesn't exist it'll make it for you
-      dbRef.on("child_added", data => { //gets called when data comes through. 'data =>' is an anonymous function shortcut
-        let id = data.key;
-        let value = data.val();
-        //So you just add that new thing
-        console.log(value);
-        chatContainer.innerHTML = "<div class='response'>" + value + "</div>" + chatContainer.innerHTML;
-      });
+  console.log(chatContainer);
 
-      console.log(chatContainer);
+  //click button will run this function
+  const textInputSubmit = document.getElementById("text-input-submit");
+  textInputSubmit.addEventListener("click", () => submitText()); 
+  //can also use "click", (e) => {console.log(e)} and when you use this the 'e' has additional info like e.pageX where on the page they clicked (would use 'window.addEventListener')
 
-      //click button will run this function
-      const textInputSubmit = document.getElementById("text-input-submit");
-      textInputSubmit.addEventListener("click", () => submitText()); 
-      //can also use "click", (e) => {console.log(e)} and when you use this the 'e' has additional info like e.pageX where on the page they clicked (would use 'window.addEventListener')
+  let textContainerElement = document.getElementById("text-input-entry");
+  function submitText() {
+    let textToSubmit = textContainerElement.value; //gets text value from textbox
+    let newKey = dbRef.push().key; //ask firebase to give you a new key / 'name'
 
-      let textContainerElement = document.getElementById("text-input-entry");
-      function submitText() {
-        let textToSubmit = textContainerElement.value; //gets text value from textbox
-        let newKey = dbRef.push().key; //ask firebase to give you a new key / 'name'
+    let updates = {}; //going to send firebase list of values
+    updates[newKey] = textToSubmit;
+    dbRef.update(updates);
+  }
 
-        let updates = {}; //going to send firebase list of values
-        updates[newKey] = textToSubmit;
-        dbRef.update(updates);
-      }
 
-      //CHAT SCROLL BOTTOM
+  //PRESENCE COUNTER
 
-      function scrollToBottom() {
-        var chat = document.getElementById("chat-container");
-        chat.scrollTop = chat.scrollHeight;
-      }
+  let presenceRef = db.ref("/presence");
+  let thisVisitor = presenceRef.push();
 
-      //PRESENCE COUNTER
+  presenceRef.on("value", function(snap) {
+    if (snap.val()) {
+      // Remove ourselves when we disconnect.
+      thisVisitor.onDisconnect().remove();
+      thisVisitor.set(true);
+    }
+  });
 
-      let presenceRef = db.ref("/presence");
-      let thisVisitor = presenceRef.push();
+  // Number of online users is the number of objects in the presence list.
+  presenceRef.on("value", function(snap) {
+    let counter = snap.numChildren() - 1;
+    console.log(counter);
+    if (counter > 1) {
+     presenceCounter.innerHTML = counter + " people are resting together in this moment";
+    } else { 
+    presenceCounter.innerHTML = counter + " person is resting here";
+   };
+  });
 
-      presenceRef.on("value", function(snap) {
-        if (snap.val()) {
-          // Remove ourselves when we disconnect.
-          thisVisitor.onDisconnect().remove();
-          thisVisitor.set(true);
-        }
-      });
+  function replace(section_id) {
+   document.getElementById('section-bed').style.display = 'none';
+   document.getElementById('section-why').style.display = 'none';
+   document.getElementById('section-presence').style.display = 'none';
+   document.getElementById('section-lineages').style.display = 'none';
+   document.getElementById('section-score').style.display = 'none';
+   document.getElementById('section-about').style.display = 'none';
+   document.getElementById(section_id).style.display ='block';
 
-      // Number of online users is the number of objects in the presence list.
-      presenceRef.on("value", function(snap) {
-        let counter = snap.numChildren() - 1;
-        console.log(counter);
-        if (counter > 1) {
-         presenceCounter.innerHTML = counter + " people are resting together in this moment";
-        } else { 
-        presenceCounter.innerHTML = counter + " person is resting here";
-       };
+   if (section_id == 'section-presence') {
+     document.getElementById('current-section').style.backgroundImage = "url('./media/vid_car.gif')";
+   } else {
+     document.getElementById('current-section').style.backgroundImage = "none";
+   }
+  }
 
-      });
+  function submitlock() {
+    let entry = document.getElementById("text-input-entry");
+    let share = document.getElementById("text-input-submit");
+    entry.remove();
+    share.value = "WE FEEL YOU!";
+    share.style.width = "70%";
+    share.disabled = true;
+  }
 
-      function replace(section_id) {
-       document.getElementById('section-bed').style.display = 'none';
-       document.getElementById('section-why').style.display = 'none';
-       document.getElementById('section-presence').style.display = 'none';
-       document.getElementById('section-lineages').style.display = 'none';
-       document.getElementById('section-score').style.display = 'none';
-       document.getElementById('section-about').style.display = 'none';
-       document.getElementById(section_id).style.display ='block';
-
-       if (section_id == 'section-presence') {
-         document.getElementById('current-section').style.backgroundImage = "url('./media/vid_car.gif')";
-       } else {
-         document.getElementById('current-section').style.backgroundImage = "none";
-       }
-      }
-
-    </script>
+</script>
 
 </html>
