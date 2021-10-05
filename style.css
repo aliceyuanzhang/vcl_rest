@@ -3,11 +3,6 @@
   src: url("./fonts/OCRAEXT.TTF") format("truetype");
 }
 
-@media only screen and (max-width: 600px) {
-
-
-}
-
 body {
   margin:2vw;
   max-height:100%;  /* added */
@@ -336,7 +331,7 @@ a {
 .response {
   color: white;
   margin: 5px 10px 5px 10px;
-  transition: color 1.5s ease-in-out;
+  transition: color 1s ease-in-out;
 }
 
 .response:hover {
@@ -377,5 +372,124 @@ input[type=submit]:hover {
 
 input:focus::placeholder {
   color: transparent;
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 12px;
+  }
+
+  #menu {
+    position: absolute;
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    flex-wrap: wrap;
+    max-width: 100%;
+    overflow-x: visible;
+    margin-top: -40vw;
+    left: -5vw;
+  }
+
+  #bed {
+    position: relative;
+    top: 0;
+    left: 0;
+    margin-top: auto;
+    margin-left: auto;
+  }
+
+  #why {
+    position: relative;
+    top: 0;
+    left: 0;
+    margin-top: auto;
+    margin-left: auto;
+  }
+
+  #presence {
+    position: relative;
+    top: 0;
+    left: 0;
+    margin-top: auto;
+    margin-left: auto;
+  }
+
+  #lineages {
+    position: relative;
+    top: 0;
+    left: 0;
+    margin-top: auto;
+    margin-left: auto;
+  }
+
+  #score {
+    position: relative;
+    top: 0;
+    left: 0;
+    margin-top: auto;
+    margin-left: auto;
+  }
+
+  #about {
+    position: relative;
+    top: 0;
+    left: 0;
+    margin-top: auto;
+    margin-left: auto;
+  }
+
+  #main-section {
+    position: relative;
+    margin-top: 30vw;
+    max-height: 40vw;
+    z-index: auto;
+  }
+
+  #current-section {
+    max-height: 50%;
+  }
+
+  #chat-container {
+    max-height: 30vw;
+  }
+
+  #section-why {
+    max-width: 90%;
+  }
+
+  #section-lineages {
+    max-width: 90%;
+  }
+
+  #section-presence {
+    font-size: 16px;
+  }
+
+  #section-score {
+    max-width: 90%;
+  }
+
+  #section-about {
+    max-width: 90%;
+  }
+
+  #bedqbr {
+    display: none;
+  }
+
+  footer {
+    position: relative;
+    float: center;
+    width: 100%;
+    text-align: center;
+    bottom: -50px;
+    left: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
