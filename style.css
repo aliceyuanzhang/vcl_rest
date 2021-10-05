@@ -388,6 +388,10 @@ input:focus::placeholder {
     padding-right: 0;
   }
 
+  input[type=submit] {
+  width: 25%;
+  }
+
   #menu {
     position: absolute;
     z-index: 20;
@@ -460,10 +464,13 @@ input:focus::placeholder {
 
   #current-section {
     max-height: 50%;
+    padding-top: 0;
+    padding-bottom: 0;
   }
 
   #chat-container {
     max-height: 25vw;
+    max-width: 100%;
   }
 
   #section-why {
@@ -504,7 +511,7 @@ input:focus::placeholder {
     float: center;
     width: 100%;
     text-align: center;
-    bottom: -50px;
+    bottom: -40px;
     left: 0;
     margin-left: auto;
     margin-right: auto;
