@@ -188,7 +188,7 @@ a {
 #current-section {
   z-index: auto;
   position: relative;
-  height: 35em;
+  height: 38em;
   width: 60%;
   margin-left: auto;
   margin-right: auto;
@@ -204,7 +204,7 @@ a {
 #section-why {
   margin-left: auto;
   margin-right: auto;
-  max-width: 70%;
+  max-width: 80%;
   max-height: 70%;
   padding: 2vw;
   overflow-y: scroll;
@@ -238,7 +238,7 @@ a {
 #section-lineages {
   margin-left: auto;
   margin-right: auto;
-  max-width: 70%;
+  max-width: 80%;
   max-height: 70%;
   padding: 2vw;
   overflow-y: scroll;
@@ -265,7 +265,7 @@ a {
 #section-score {
   margin-left: auto;
   margin-right: auto;
-  max-width: 70%;
+  max-width: 80%;
   max-height: 70%;
   padding: 2vw;
   overflow-y: scroll;
@@ -292,7 +292,7 @@ a {
 #section-about {
   margin-left: auto;
   margin-right: auto;
-  max-width: 70%;
+  max-width: 80%;
   max-height: 70%;
   padding: 2vw;
   overflow-y: scroll;
@@ -316,7 +316,7 @@ a {
       }
 
 #chat-container {
-  max-height: 200px;
+  max-height: 250px;
   overflow: scroll;
   max-width: 65%;
   margin-left: auto;
