@@ -22,8 +22,8 @@ body {
 }
 
 html { 
-    background-image: url(./images/bkgd.jpg); 
-    background-color: rgba(87,39,102,1);
+    background-image: url(./images/dot-mesh.png), url(./images/bkgd.gif); 
+    background-color: rgba(80,12,50,1);
     background-blend-mode: multiply;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -55,6 +55,20 @@ footer {
 
 a {
   color: white;
+}
+
+#pop-up-img {
+  width: 40%;
+  height: 40%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  z-index: 100;
+  display: none;
 }
 
 #bed {
@@ -191,7 +205,7 @@ a {
   margin-left: auto;
   margin-right: auto;
   max-width: 70%;
-  max-height: 80%;
+  max-height: 70%;
   padding: 2vw;
   overflow-y: scroll;
   display: none;
@@ -225,7 +239,7 @@ a {
   margin-left: auto;
   margin-right: auto;
   max-width: 70%;
-  max-height: 80%;
+  max-height: 70%;
   padding: 2vw;
   overflow-y: scroll;
   display: none;
@@ -252,7 +266,7 @@ a {
   margin-left: auto;
   margin-right: auto;
   max-width: 70%;
-  max-height: 80%;
+  max-height: 70%;
   padding: 2vw;
   overflow-y: scroll;
   display: none;
@@ -279,7 +293,7 @@ a {
   margin-left: auto;
   margin-right: auto;
   max-width: 70%;
-  max-height: 80%;
+  max-height: 70%;
   padding: 2vw;
   overflow-y: scroll;
   display: none;
