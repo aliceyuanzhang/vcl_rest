@@ -149,7 +149,7 @@ a {
       }
 
 #about {
-  margin-top: 38em;
+  margin-top: 40em;
   left: 25%;
   background-image: url(./images/about.png);
   background-size: contain;
@@ -167,7 +167,7 @@ a {
       }
 
 #main-section {
-  max-height: 50em;
+  max-height: 55em;
   position: relative;
 }
 
@@ -196,11 +196,7 @@ a {
   overflow-y: scroll;
   display: none;
 }
-      .frame::-webkit-scrollbar {
-          -webkit-appearance: none;
-      }
-
-      #section-why::-webkit-scrollbar:vertical {
+      #section-why::-webkit-scrollbar {
         width: .8em;
       }
 
@@ -377,9 +373,19 @@ input:focus::placeholder {
   color: transparent;
 }
 
-@media (max-width: 768px) {
+.mobile-add {
+  display: none;
+}
+
+.mobile-add-bed {
+  display: none;
+}
+
+@media only screen and (max-width: 768px) {
   body {
     font-size: 12px;
+    padding-left: 0;
+    padding-right: 0;
   }
 
   #menu {
@@ -480,8 +486,17 @@ input:focus::placeholder {
     max-width: 90%;
   }
 
-  .bedqbr {
+  .mobile-remove {
     display: none;
+  }
+
+  .mobile-add {
+    display: inline;
+    color: white;
+  }
+
+  .mobile-add-bed {
+    display: inline;
   }
 
   footer {

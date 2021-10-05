@@ -47,27 +47,26 @@
        <div id="about" onclick="replace('section-about')">ABOUT</div>
      </div>
      <div id='current-section'>
-
          <br><br>
          <div id='section-bed'>
-              <span class="bedqbr"><br></span>
-              WHAT DO WE NEED IN ORDER TO REST WELL?<span class="bedqbr"><br></span>
+              <div class="mobile-remove"><br></div>
+              WHAT DO WE NEED IN ORDER TO REST WELL?<span class="mobile-remove"><br></span>
               HOW CAN WE OPEN UP SPACE FOR OTHERS TO REST WELL?
-              <br><br><br>
-
+              <br><br>
+              <span class="mobile-add-bed">▲<br></span><br>
               <!-- This list is where all text in the database is shown -->
               <div id="chat-container"></div>
-              <br><br>
-              
+              <span class="mobile-add-bed"><br>▼</span><br><br>
               <!-- This input form controls submission of text input -->
               <form id="text-input-form" onsubmit="return false">
-                <input type="text" id="text-input-entry" placeholder="Let folks know..."/>
+                <input type="text" id="text-input-entry" placeholder="Let us know..."/>
                 <input type="submit" id="text-input-submit" onclick="submitlock()" value="Share"/>
               </form>
               <br><br>
          </div>
 
          <div id='section-why'>
+              <div class="mobile-add">▼ scroll ▼<br><br></div>
               The work of caring for societies starts with caring for ourselves and each other. Rest is as essential to our communities as it is to our bodily health, and it is under constant threat from neoliberal pressures that demands constant work in order to justify individual life. Meaningful rest intervenes in that current: it offers a necessary break, however short-lived, from the daily rhetoric that says you need to work, earn money, <i>do do do</i> despite a <i>global pandemic – climate crisis – ongoing systemic oppression based on race, class, and immigration status – economic downturns – mass unemployment – housing precarity – hyper police state – mental health needs – illness - and so on...</i>
               <br><br>
               Finding rest may involve building communities of care that nurture shared moments of leisure, listening, and togetherness. It may mean taking a day off from work if possible, or asking others for help, or creating ways to recharge. (Sometimes, finding rest may mean noticing how the ways you move through the world may make you complicit in systems of oppression.) And, we need not work alone – we can do this together, in solidarity. 
@@ -90,7 +89,7 @@
          </div>
 
          <div id='section-lineages'>
-
+          <div class="mobile-add">▼ scroll ▼<br><br></div>
           We are honored to share stories, books, articles, conversations, memories, and somatic impressions that have provided valuable inspiration in developing a collective rest practice. We celebrate alternative modes of inquiry from anecdotal storytelling, movement research, and other media and practices alongside more academically typical books and articles, acknowledging the complex and very human traditions of rest that inspire us. 
           <br><br><hr><br>
           <i>“One of the few memories I have before migrating across the pacific was resting in my grandparent’s house. I would spend whole afternoons in the south-facing room, lying on my back as one or two of the mothers or family friends gossiped while rhythmically patting my stomach with their knowing, battered hands. Nowadays it’s become a healing memory I revisit often to remind my body what it feels like to be held communally, outside of capitalistic expectations.”</i>
@@ -124,6 +123,7 @@
          </div>
 
          <div id='section-score'>
+          <div class="mobile-add">▼ scroll ▼<br><br></div>
           You’re here. 
           <br><br>
           Settle into a cozy place for a bit—a bed or couch or floor.
@@ -186,6 +186,7 @@
          </div>
 
          <div id='section-about'>
+          <div class="mobile-add">▼ scroll ▼<br><br></div>
           <a href="http://virtualcarelab.com/about">virtual care lab</a> is an open assemblage of people exploring presence, connection and collaboration in digital contexts. We hold creative exchanges of joy, grief, breath, ideas, resources, and expansive forms of community care. Our projects have included many unconventional virtual gatherings, focused discussions, participatory performances, and online portals that celebrate experimentalism and invite people to explore risky or raw ideas, question things, get real, and reinvent identities, myths and protocols for ourselves, together.  
           <br><br>
           We created this collective rest portal as part of the 2021 <a href="https://www.4sonline.org/meeting/">4S Annual Meeting</a>. We will hold a <a href="https://www.eventbrite.ca/e/4s-x-virtual-care-lab-collective-rest-nap-dream-portal-tickets-175137941297">public gathering on Fri, Oct 9</a> to practice resting with each other through meditation and social dreaming. 
@@ -193,8 +194,7 @@
           <i>Portal contributors: Alice Yuan Zhang, Sara Victoria Suárez, Elenie Chung, hannah rubin, Lea Rose Sebastianis, Marcus Brittain Fleming. 
           <br><br>This mini-site is designed and developed by Alice Yuan Zhang. </i>
          </div>
-
-         <br><br>
+          <br><br><br><div class="mobile-remove"><br><br><br><br></div>
      </div>
 </body>
 
@@ -278,28 +278,30 @@
   });
 
   function replace(section_id) {
-   document.getElementById('section-bed').style.display = 'none';
-   document.getElementById('section-why').style.display = 'none';
-   document.getElementById('section-presence').style.display = 'none';
-   document.getElementById('section-lineages').style.display = 'none';
-   document.getElementById('section-score').style.display = 'none';
-   document.getElementById('section-about').style.display = 'none';
-   document.getElementById(section_id).style.display ='block';
+     document.getElementById('section-bed').style.display = 'none';
+     document.getElementById('section-why').style.display = 'none';
+     document.getElementById('section-presence').style.display = 'none';
+     document.getElementById('section-lineages').style.display = 'none';
+     document.getElementById('section-score').style.display = 'none';
+     document.getElementById('section-about').style.display = 'none';
+     document.getElementById(section_id).style.display ='block';
 
-   if (section_id == 'section-presence') {
-     document.getElementById('current-section').style.backgroundImage = "url('./media/vid_car.gif')";
-   } else {
-     document.getElementById('current-section').style.backgroundImage = "none";
-   }
+     if (section_id == 'section-presence') {
+       document.getElementById('current-section').style.backgroundImage = "url('./media/vid_car.gif')";
+     } else {
+       document.getElementById('current-section').style.backgroundImage = "none";
+     }
   }
 
   function submitlock() {
-    let entry = document.getElementById("text-input-entry");
-    let share = document.getElementById("text-input-submit");
-    entry.remove();
-    share.value = "WE FEEL YOU!";
-    share.style.width = "70%";
-    share.disabled = true;
+      let entry = document.getElementById("text-input-entry");
+      let share = document.getElementById("text-input-submit");
+      entry.remove();
+      share.value = "WE FEEL YOU!";
+      share.style.width = "70%";
+      share.disabled = true;
   }
+
+
 
 </script>
